@@ -24,12 +24,9 @@ set(TFLITE_ENABLE_XNNPACK OFF)
 set(ABSL_PROPAGATE_CXX_STD ON)
 add_subdirectory(third_party/tensorflow/tensorflow/lite)
 
-# ARM libraries for Raspberry Pi (mmal, vcos, etc.)
+# ARM libraries for Raspberry Pi (mmal, vcos, raspicam. etc)
+set (VIDEOCORE_BUILD_DIR "${CMAKE_BINARY_DIR}/userland_build" CACHE STRING "")
 add_subdirectory(third_party/userland/)
-
-# RaspiCam
-set(BUILD_SHARED_LIBS OFF)
-# add_subdirectory(third_party/raspicam)
                            
 # Demo
 # add_subdirectory(demo)
