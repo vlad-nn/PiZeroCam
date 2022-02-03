@@ -32,4 +32,4 @@ add_subdirectory(third_party/userland)
 add_subdirectory(third_party/raspicam)
                            
 # Demo
-# add_subdirectory(demo)
+add_subdirectory(demo)
