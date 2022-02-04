@@ -1,6 +1,6 @@
 #
-# Root CMake file to cross compile TFLite, ARM libraries for Raspberry Pi,
-# RaspiCam and demo application
+# Root CMake file to cross compile applications for Pi camera capture and AI processing
+# with all third party library dependencies
 #
 # Runs on Ubuntu x64 host
 # Compiles for ARMv6 (Raspberry Pi Zero)
@@ -18,18 +18,9 @@ cmake_minimum_required(VERSION 3.16)
 set(CMAKE_TOOLCHAIN_FILE tools/pizero-toolchain.cmake)
 
 project(PiZeroCam C CXX)
-               
-# TFLite
-set(TFLITE_ENABLE_XNNPACK OFF)
-set(ABSL_PROPAGATE_CXX_STD ON)
-# add_subdirectory(third_party/tensorflow/tensorflow/lite)
 
-# ARM libraries for Raspberry Pi (mmal, vcos, etc)
-set (VIDEOCORE_BUILD_DIR "${CMAKE_BINARY_DIR}/userland_build" CACHE STRING "")
-add_subdirectory(third_party/userland)
-
-# raspicam: C++ wrapper for Pi camera
-add_subdirectory(third_party/raspicam)
+# third-party
+add_subdirectory(third_party)
                            
 # Demo
 add_subdirectory(demo)

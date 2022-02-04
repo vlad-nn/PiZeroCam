@@ -7,3 +7,6 @@
 [submodule "third_party/userland"]
 	path = third_party/userland
 	url = https://github.com/raspberrypi/userland
+[submodule "third_party/opencv"]
+	path = third_party/opencv
+	url = https://github.com/opencv/opencv.git
