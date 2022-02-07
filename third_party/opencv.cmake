@@ -1,35 +1,8 @@
 #
-# CMake file to cross compile third-party librearies: TFLite, ARM libraries for Raspberry Pi,
-# RaspiCam, OpenCV
-#
-# Runs on Ubuntu x64 host
-# Compiles for ARMv6 (Raspberry Pi Zero)
+# CMake initial settings file to compile OpenCV with minimum feature set
+# Should contain only set() statements
 #
 
-#
-# TFLite
-#
-set(TFLITE_ENABLE_XNNPACK OFF)
-set(ABSL_PROPAGATE_CXX_STD ON)
-add_subdirectory(tensorflow/tensorflow/lite)
-
-
-#
-# ARM libraries for Raspberry Pi (mmal, vcos, etc)
-#
-set (VIDEOCORE_BUILD_DIR "${CMAKE_BINARY_DIR}/userland_build" CACHE STRING "")
-add_subdirectory(userland)
-
-
-#
-# raspicam: C++ wrapper for Pi camera
-#
-add_subdirectory(raspicam)
- 
-
-#                          
-# OpenCV with minimum feature set
-#
 set(OPENCV_FORCE_3RDPARTY_BUILD ON CACHE BOOL "")
 set(WITH_VTK OFF CACHE BOOL "")
 set(WITH_DSHOW OFF CACHE BOOL "")
@@ -81,7 +54,7 @@ set(WITH_PROTOBUF OFF CACHE BOOL "")
 set(BUILD_PACKAGE OFF CACHE BOOL "")
 set(BUILD_ITT OFF CACHE BOOL "")
 set(WITH_JASPER OFF CACHE BOOL "")
-set(BUILD_opencv_world OFF CACHE BOOL "")
+set(BUILD_opencv_world ON CACHE BOOL "")
 set(WITH_OPENEXR OFF CACHE BOOL "")
 set(BUILD_opencv_js_bindings_generator OFF CACHE BOOL "")
 set(WITH_MSMF_DXVA OFF CACHE BOOL "")
@@ -117,4 +90,12 @@ set(BUILD_WITH_STATIC_CRT OFF CACHE BOOL "")
 set(BUILD_TIFF OFF CACHE BOOL "")
 set(ccitt OFF CACHE BOOL "")
 
-add_subdirectory(opencv)
+
+if(inBuildExternalDependency)
+
+  # add phony target to access include and library path
+  add_library(opencv INTERFACE IMPORTED)
+  target_link_libraries(opencv INTERFACE ${my_install_dir}/lib/libopencv_world.a)
+  target_include_directories(opencv INTERFACE ${my_install_dir}/include/opencv4)
+
+endif()

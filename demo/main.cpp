@@ -1,6 +1,9 @@
 #include <raspicam.h>
 #include <vector>
 #include <fstream>
+#include <opencv2/opencv.hpp>
+#include <tensorflow/lite/interpreter.h>
+
 
 
 //

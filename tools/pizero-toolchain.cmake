@@ -11,7 +11,7 @@ set(CMAKE_CXX_COMPILER arm-linux-gnueabi-g++)
 set(CMAKE_ASM_COMPILER arm-linux-gnueabi-gcc)
 
 # compile flags
-set(ARMCC_FLAGS "-march=armv6 -mfpu=vfp -funsafe-math-optimizations -Wno-psabi -Wimplicit-fallthrough=0")
+set(ARMCC_FLAGS "-march=armv6 -mfpu=vfp -funsafe-math-optimizations -Wno-psabi")
 set(CMAKE_C_FLAGS ${ARMCC_FLAGS})                
 set(CMAKE_CXX_FLAGS ${ARMCC_FLAGS})
 
